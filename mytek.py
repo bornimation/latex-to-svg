@@ -1,4 +1,5 @@
 #This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
+#This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 #Takes input from user.
 tex_equation = input("Type equation - ")
@@ -23,6 +24,7 @@ os.system('pdftocairo -svg tex_file.pdf output.svg')
 #os.system('pdftocairo -svg tex_file.pdf output.tirf')
 #os.system('pdftocairo -svg tex_file.pdf output.ps')
 #os.system('pdftocairo -svg tex_file.pdf output.eps')
+os.system('rm tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
 os.system('exit')
 print("Output is written in output.svg")
 
