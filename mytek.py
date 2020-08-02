@@ -6,6 +6,7 @@ print("This program takes tex equation as input and produces svg file of the equ
 #install texlive : sudo apt install texlive --full.
 #install pdftocairo : sudo apt install poppler-utils.
 #install PIL : pip install Pillow.
+#pillow is not required if you do not want scaling.
 #install rsvg convert : apt-get install librsvg2-bin.
 #rsvg package is not required if you do not want scaling.
 
