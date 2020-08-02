@@ -1,8 +1,10 @@
-#This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
-#This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
+#This program takes tex command and scaling factor as input and output svg files. You must have texlive, pdftocairo,rsvg-convert installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
+from PIL import Image
 #Takes input from user.
 tex_equation = input("Type equation - ")
+scale = input("Put scaling % factor - ")
+
 #open files to write.
 tex_file = open('tex_file.tex','w')
 tex_file.writelines("\documentclass[tikz]{standalone}\n")
@@ -15,16 +17,32 @@ tex_file.writelines("$};\n")
 tex_file.writelines("\end{tikzpicture}\n")
 tex_file.writelines("\end{document}\n")
 tex_file.close()
+
 #system command to compile the tex file.
 os.system('pdflatex tex_file.tex')
-#system command to convert the pdf file to svg file.
-os.system('pdftocairo -svg tex_file.pdf output.svg')
-#os.system('pdftocairo -svg tex_file.pdf output.png')
-#os.system('pdftocairo -svg tex_file.pdf output.jpeg')
-#os.system('pdftocairo -svg tex_file.pdf output.tirf')
-#os.system('pdftocairo -svg tex_file.pdf output.ps')
-#os.system('pdftocairo -svg tex_file.pdf output.eps')
-os.system('rm tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
+os.system('pdftocairo -png tex_file.pdf temp.png')
+im=Image.open('temp.png-1.png')
+os.system('pdftocairo -svg tex_file.pdf temp.svg')
+width=im.size[0]
+height=im.size[1]
+sw=str(width*scale)
+sh=str(height*scale)
+print(sw,sh)
+def str_cat(x):
+	s = ''
+	for i in range(len(x)):
+		s+=x[i]
+	return s
+		 
+##
+py_file=open('scale.py','w')
+py_file.writelines("import os\n")
+#py_file.writelines(str_cat(sw))
+#py_file.writelines(str_cat(sh))
+py_file.writelines("os.system('rsvg-convert temp.svg -w"+" "+str_cat(sw)+" -h"+" "+str_cat(sh)+" -f svg -o output.svg')\n")
+py_file.close()
+os.system("python3 scale.py")
+
+#os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
 os.system('exit')
 print("Output is written in output.svg")
-
