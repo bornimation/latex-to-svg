@@ -1,9 +1,12 @@
 #This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 from PIL import Image
-#Takes input from user.
+
+#Takes tex input from user.
 tex_equation = input("Type equation - ")
-scale = input("Put scaling % factor - ")
+
+#Takes scale input from user.
+scale = input("Type % scaling factor - ")
 
 #open files to write.
 tex_file = open('tex_file.tex','w')
@@ -20,24 +23,40 @@ tex_file.close()
 
 #system command to compile the tex file.
 os.system('pdflatex tex_file.tex')
+
+#pdf to png conversion.
 os.system('pdftocairo -png tex_file.pdf temp.png')
+
+#opens the png file.
 im=Image.open('temp.png-1.png')
+
+#pdf to svg conversion.
 os.system('pdftocairo -svg tex_file.pdf temp.svg')
+
+#deermines the width and height of the png file.
 width=im.size[0]
 height=im.size[1]
+
+#height and width are scaled.
 sw=str(width*int(scale))
 sh=str(height*int(scale))
+
 def str_cat(x):
 	s = ''
 	for i in range(len(x)):
 		s+=x[i]
 	return s
+
+#python file to scale.
 py_file=open('scale.py','w')
 py_file.writelines("import os\n")
 py_file.writelines("os.system('rsvg-convert temp.svg -w"+" "+str_cat(sw)+" -h"+" "+str_cat(sh)+" -f svg -o output.svg')\n")
 py_file.close()
+
+#runs python file.
 os.system("python3 scale.py")
 
+#remove temporary file.
 os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
 os.system('exit')
 print("Output is written in output.svg")
