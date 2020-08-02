@@ -33,6 +33,7 @@ tex_file.close()
 #system command to compile the tex file.
 os.system('pdflatex tex_file.tex')
 
+#we want to do scaling by keeping the aspect ratio same. For that we need the dimension of the image. We will first convert the pdf output of LaTeX to a png file to estimate the dimension, then we will use the dimensions to scale the svg file.
 #pdf to png conversion.
 os.system('pdftocairo -png tex_file.pdf temp.png')
 
