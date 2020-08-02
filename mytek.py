@@ -1,12 +1,19 @@
 #This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 from PIL import Image
+print("This program takes tex equation as input and produces svg file of the equation using LaTeX. Type your equation below as you type in a LaTeX compiler. The scale factor (non zero integer) scales your svg file by the input given. Typical values for scale input are 10,100. Output will be written in output.svg file.\n")
+
+#install texlive : sudo apt install texlive --full.
+#install pdftocairo : sudo apt install poppler-utils.
+#install PIL : pip install Pillow.
+#install rsvg convert : apt-get install librsvg2-bin.
+#rsvg package is not required if you do not want scaling.
 
 #Takes tex input from user.
 tex_equation = input("Type equation - ")
 
 #Takes scale input from user.
-scale = input("Type % scaling factor - ")
+scale = input("Type scaling factor - ")
 
 #open files to write.
 tex_file = open('tex_file.tex','w')
