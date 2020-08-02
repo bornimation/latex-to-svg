@@ -1,4 +1,4 @@
-#This program takes tex command and scaling factor as input and output svg files. You must have texlive, pdftocairo,rsvg-convert installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
+#This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 from PIL import Image
 #Takes input from user.
@@ -25,24 +25,19 @@ im=Image.open('temp.png-1.png')
 os.system('pdftocairo -svg tex_file.pdf temp.svg')
 width=im.size[0]
 height=im.size[1]
-sw=str(width*scale)
-sh=str(height*scale)
-print(sw,sh)
+sw=str(width*int(scale))
+sh=str(height*int(scale))
 def str_cat(x):
 	s = ''
 	for i in range(len(x)):
 		s+=x[i]
 	return s
-		 
-##
 py_file=open('scale.py','w')
 py_file.writelines("import os\n")
-#py_file.writelines(str_cat(sw))
-#py_file.writelines(str_cat(sh))
 py_file.writelines("os.system('rsvg-convert temp.svg -w"+" "+str_cat(sw)+" -h"+" "+str_cat(sh)+" -f svg -o output.svg')\n")
 py_file.close()
 os.system("python3 scale.py")
 
-#os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
+os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
 os.system('exit')
 print("Output is written in output.svg")
