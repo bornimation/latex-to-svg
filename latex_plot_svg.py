@@ -1,4 +1,4 @@
-#This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
+#This program takes equation as input and output plot svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 from PIL import Image
 print("Runs on linux only. This program takes tex equation as input and produces svg file of the equation using LaTeX. Type your equation below as you type in a LaTeX compiler. The scale factor (non zero integer) scales your svg file by the input given. Typical values for scale input are 1(no scaling),10,100. Output will be written in output.svg file. Check the program for more info.\n")
