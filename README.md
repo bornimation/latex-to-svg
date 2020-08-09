@@ -1,5 +1,11 @@
 # latex-to-svg
-This is a command line tool. Run the program from your linux terminal.
-A python code to output latex equations in svg/png/jpeg/ format.
+This program takes LaTeX equations as input and output the equation as svg file. It is a command line tool made for linux machines.
 
-This program uses pdftocairo to convert latex equations to output svg files. It uses tikz, standalone packages to complie the latex code.
+Requirements 
+- pdfcairo
+- tikz(LaTeX package)
+- standalone(LaTeX package)
+- PIL package (python library)
+
+pdfcairo, tikz and standalone are necessary. If you want scaling in your output file (which is required in blender), you may use PIL library. It is recommended that you install texlive full in linux (sudo apt install texlive -full), this will provide both tikz and standalone package.
+
