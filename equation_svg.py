@@ -1,7 +1,7 @@
 #This program takes tex command as input and output svg files. You must have texlive, pdftocairo installed in our system, the program is written for linux os. Written by Sasanka Dowarah.
 import os
 from PIL import Image
-print("Runs on linux only. This program takes tex equation as input and produces svg file of the equation using LaTeX. Type your equation below as you type in a LaTeX compiler. The scale factor (non zero integer) scales your svg file by the input given. Typical values for scale input are 1(no scaling),10,100. Output will be written in output.svg file. Check the program for more info.\n")
+#print("Runs on linux only. This program takes tex equation as input and produces svg file of the equation using LaTeX. Type your equation below as you type in a LaTeX compiler. The scale factor (non zero integer) scales your svg file by the input given. Typical values for scale input are 1(no scaling),10,100. Output will be written in output.svg file. Check the program for more info.\n")
 
 #if you want to use the svg files in blender, you should use scaling.
 #install texlive : sudo apt install texlive --full.
@@ -16,6 +16,7 @@ tex_equation = input("Type equation - ")
 
 #Takes scale input from user.
 scale = input("Type scaling factor - ")
+
 
 #open files to write.
 tex_file = open('tex_file.tex','w')
@@ -47,7 +48,7 @@ im=Image.open('temp.png-1.png')
 #pdf to svg conversion.
 os.system('pdftocairo -svg tex_file.pdf temp.svg')
 
-#deermines the width and height of the png file.
+#determines the width and height of the png file.
 width=im.size[0]
 height=im.size[1]
 
@@ -69,8 +70,10 @@ py_file.close()
 
 #runs python file.
 os.system("python3 scale.py")
-
+os.system("rm -rf temporary")
+os.system("mkdir temporary")
+os.system("mv temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.tex tex_file.pdf temporary")
 #remove temporary file.
-os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.pdf tex_file.tex')
+#os.system('rm temp.png-1.png scale.py temp.svg tex_file.aux tex_file.log tex_file.tex')
 os.system('exit')
 print("Output is written in output.svg")
