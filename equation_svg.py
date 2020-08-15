@@ -20,19 +20,22 @@ scale = input("Type scaling factor - ")
 
 #open files to write.
 tex_file = open('tex_file.tex','w')
-tex_file.writelines("\documentclass[tikz]{standalone}\n")
-tex_file.writelines("\\usepackage[utf8]{inputenc}\n")
-tex_file.writelines("\\usepackage{amsmath}\n")
-tex_file.writelines("\\usepackage{amssymb}\n")
-tex_file.writelines("\\usepackage{physics}\n")
-tex_file.writelines("\\begin{document}\n")
-tex_file.writelines("\\begin{tikzpicture}\n")
-tex_file.writelines("\draw[line width=0mm] (0,0) rectangle (0,0) node [midway]\n")
-tex_file.writelines("{$")
+tex_file.write(r"""
+\documentclass[tikz]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\begin{document}
+\begin{tikzpicture}
+\draw[line width=0mm] (0,0) rectangle (0,0) node [midway]
+{$""")
 tex_file.writelines(tex_equation)
-tex_file.writelines("$};\n")
-tex_file.writelines("\end{tikzpicture}\n")
-tex_file.writelines("\end{document}\n")
+tex_file.write(r"""
+ $};
+\end{tikzpicture}
+\end{document}
+""")
 tex_file.close()
 
 #system command to compile the tex file.
