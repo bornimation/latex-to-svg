@@ -1,4 +1,5 @@
 # latex-to-svg
+Visit wiki for demo.
 This program takes LaTeX equations as input and output the equation as svg file. It is a command line tool made for linux machines.
 
 Requirements 
